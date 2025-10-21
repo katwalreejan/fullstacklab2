@@ -1,13 +1,19 @@
-   // Import specific functions from date-fns
-const { format, addDays } = require('date-fns');
+const express = require('express');
+const app = express();
+const port = 3001;
 
-// Get the current date
-const currentDate = new Date();
+// Callback function for the root endpoint
+const handleRootRequest = (req, res) => {
+  res.send('Hello World!');
+};
 
-// Format the current date
-const formattedDate = format(currentDate, 'MMMM dd, yyyy');
-console.log('Formatted Date:', formattedDate);
+// Callback function for when the server starts listening
+const handleServerListening = () => {
+  console.log(`Example app listening on port ${port}`);
+};
 
-// Add 7 days to the current date
-const futureDate = addDays(currentDate, 7);
-console.log('Future Date:', format(futureDate, 'MMMM dd, yyyy'));
+// Registering routes with the callback functions
+app.get('/', handleRootRequest);
+
+// Starting the server and listening on the specified port
+app.listen(port, handleServerListening);
